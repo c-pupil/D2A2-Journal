@@ -23,14 +23,22 @@ w=torch.load(args.net_path)
 for key in w.keys():
     print(f"- {key}")
 # model
+# module = import_module('models.' + args.model_file)
+# if args.model_name == 'D2A2':
+#     model = module.D2A2(args).cuda()
+# else:
+#     raise NotImplementedError(f'Model {args.model_name} in file {args.model_file} not found')
+# model = nn.DataParallel(model)
+# model.load_state_dict(torch.load(args.net_path))
+# print("model done")
 model=D2A2(args).cuda()
 
 
-
+# print(model)
 n_gpus = len(os.environ['CUDA_VISIBLE_DEVICES'].split(','))
 if n_gpus > 1:
     model = torch.nn.DataParallel(model)
-
+# model.load_state_dict(torch.load(args.net_path, map_location='cuda'),strict=False)
 
 
 weights=torch.load(args.net_path)
@@ -41,9 +49,15 @@ for k, v in weights.items():
 
 model.load_state_dict(weights_dict)
 
+
+# model.load_state_dict(torch.load(args.net_path))
 print("model done")
 
 
+
+#
+# for param_tensor in model.state_dict():
+#     print(param_tensor, "\t", model.state_dict()[param_tensor].size())
 print("model done")
 
 # dataloader
