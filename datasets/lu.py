@@ -32,7 +32,7 @@ class LU_dataset(Dataset):
         s = self.scale
         target = np.array(Image.fromarray(depth).resize((w//s,h//s),Image.BICUBIC))
 
-        #a添加标准差为5的高斯噪声
+   
         noise = np.random.normal(0, 5, target.shape)
         gaussian_out = target + noise
         gaussian_out = np.clip(gaussian_out, 0, 255)
