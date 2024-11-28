@@ -40,7 +40,7 @@ class Middlebury_dataset(Dataset):
 
         image = image[:h, :w]
         depth = depth[:h, :w]
-        mde=mde[:h,:w]#add
+        mde=mde[:h,:w]
 
         target = np.array(Image.fromarray(depth).resize((w//s,h//s),Image.BICUBIC))
         # normalize
