@@ -467,7 +467,6 @@ class SFTLayer(nn.Module):
         # x[0]: fea; x[1]: cond
         scale = self.SFT_scale_conv1(F.leaky_relu(self.SFT_scale_conv0(condition), 0.1, inplace=True))
         shift = self.SFT_shift_conv1(F.leaky_relu(self.SFT_shift_conv0(condition), 0.1, inplace=True))
-        # print('进入里面',feature.shape,scale.shape,shift.shape)
         return feature * (scale + 1) + shift
 
 
