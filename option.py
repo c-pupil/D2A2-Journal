@@ -39,7 +39,7 @@ parser.add_argument('--lr', type=float, default='0.0001',
                     help='learning rate')
 parser.add_argument('--step_size', type=int, default=5000000, 
                     help='learning rate step size')
-parser.add_argument('--trainresult', type=str, default='./result/trainresult/jianci/',
+parser.add_argument('--trainresult', type=str, default='./result/trainresult/',
                     help=' train result file path')
 parser.add_argument('--last_epoch', type=int, default=-1,
                     help='train epoch')
