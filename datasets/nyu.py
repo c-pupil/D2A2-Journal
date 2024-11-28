@@ -66,7 +66,7 @@ class NYU_v2_dataset(Dataset):
             image, target, depth,mde = common.augment_info(image, target, depth,mde)#add
         
         sample = {'guidance': image, 'target': target, 'gt': depth, 'min': depth_min * 100,
-                'max': depth_max * 100,'mde':mde}#add
+                'max': depth_max * 100,'mde':mde}
         return sample
 
 
