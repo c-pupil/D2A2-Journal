@@ -461,7 +461,6 @@ class SFTLayer(nn.Module):
         # x[0]: fea; x[1]: cond
         scale = self.SFT_scale_conv1(F.leaky_relu(self.SFT_scale_conv0(condition), 0.1, inplace=True))
         shift = self.SFT_shift_conv1(F.leaky_relu(self.SFT_shift_conv0(condition), 0.1, inplace=True))
-        # print('进入里面',feature.shape,scale.shape,shift.shape)
         return feature * (scale + 1) + shift
 
 
@@ -519,8 +518,6 @@ class MainNet(nn.Module):
         mde_condition2=self.MDE_Encoder2(self.condition_convdown1(mde_condition1))
         mde_condition3=self.MDE_Encoder3(self.condition_convdown2(mde_condition2))
         mde_condition4 = self.MDE_Encoder4(self.condition_convdown3(mde_condition3))
-
-        # print('MDE的编码',mde_condition.shape)
 
         x = self.act(self.SFE(x))
         x11 = x
