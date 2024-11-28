@@ -82,7 +82,7 @@ python train_d2a2_depthanything_L.py
 
 ## Acknowledgements
 
-We thank these repos sharing their codes: [DepthAnything](https://github.com/DepthAnything/Depth-Anything-V2?tab=readme-ov-file).
+We thank these repos sharing their codes: [Depth-Anything-V2](https://github.com/DepthAnything/Depth-Anything-V2?tab=readme-ov-file).
 
 ## Citation
 
