@@ -357,7 +357,6 @@ class GatedConv2dWithActivation(torch.nn.Module):
             if isinstance(m, nn.Conv2d):
                 nn.init.kaiming_normal_(m.weight)
     def gated(self, mask):
-        #return torch.clamp(mask, -1, 1)
         return self.sigmoid(mask)
     def forward(self, input):
         x = self.conv2d(input)
@@ -501,13 +500,12 @@ class MainNet(nn.Module):
         mde_condition1=self.MDE_Encoder2(self.condition_convdown1(mde_condition))
         mde_condition2=self.MDE_Encoder3(self.condition_convdown2(mde_condition1))
 
-        # print('MDE的编码',mde_condition.shape)
 
         x = self.act(self.SFE(x))
         x11 = x
 
         ref_lv3 = self.act(self.conv11_head(ref_lv3))
-        # print('看一看融合之前的',x11.shape,ref_lv3.shape)
+
         x11 = self.concatMDE1(x11, mde_condition2)
         x11 = self.concat1(x11,ref_lv3)
 
@@ -547,7 +545,7 @@ class D2A2(nn.Module):
         if self.args.scale > 4:
             lr = F.interpolate(lr, scale_factor=self.args.scale//4, mode='bicubic')
 
-        ref=torch.cat([ref, MDE], dim=1)#把MDE图还是拼到 可以做消融
+        ref=torch.cat([ref, MDE], dim=1)
 
         ref_lv1, ref_lv2, ref_lv3 = self.LTE(ref)
 
@@ -563,7 +561,7 @@ if __name__ == '__main__':
     model = D2A2(args).cuda()
     total_params = sum(p.numel() for p in model.parameters())
     print(f"Total Params: {total_params}")
-    # summary(model, input_size=[(1, 3, 256, 256), (1, 1, 32, 32), (1, 1, 256, 256)])  # 根据您的实际输入大小调整
+
 
     img = torch.randn(1, 3, 256, 256).cuda()
     depth = torch.randn(1, 1, 32, 32).cuda()
